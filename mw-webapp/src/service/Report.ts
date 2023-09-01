@@ -5,11 +5,27 @@ import {PlanForTomorrow} from "src/model/report/planForTomorrow/PLanForTomorrow"
 import {Time} from "src/model/report/time/Time";
 import {Unit} from "src/model/report/time/unit/Unit";
 
+
 const reportDTOToBusinessConverter = (reportRaw: ReportDTO) => new Report({
   ...reportRaw,
   date: new Date(reportRaw.date),
-  workDone: reportRaw.workDone?.map((workItem) =>
-    new WorkDone(workItem.id, workItem.todoItem, new Time(Unit[workItem.time.unit], workItem.time.amount))),
+  // TODO KAte move to converter
+  workDone: reportRaw.workDone?.map((workItem) => {
+    const time = new Time(
+      Unit[workItem.time.unit],
+      workItem.time.amount,
+    );
+
+    const workDone = new WorkDone({
+      id: workItem.id,
+      todoItem: workItem.todoItem,
+      time,
+    });
+
+    return workDone;
+
+  },
+  ),
   planForTomorrow: reportRaw.planForTomorrow?.map((planItem) =>
     new PlanForTomorrow(planItem.id, planItem.todoItem, new Time(Unit[planItem.time.unit], planItem.time.amount))),
 });

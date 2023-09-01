@@ -1,5 +1,5 @@
-import {WelcomePage} from "src/logic/welcomePage/WelcomePage";
-import {MainPage} from "src/logic/mainPage/MainPage";
+import {AuthPage} from "src/pages/authPage/AuthPage";
+import {MainPage} from "src/pages/mainPage/MainPage";
 
 /**
  * Pages meta data
@@ -7,7 +7,7 @@ import {MainPage} from "src/logic/mainPage/MainPage";
 export const pages = {
   welcome: {
     path: "/",
-    element: <WelcomePage />,
+    element: <AuthPage />,
   },
   main: {
     path: "main",

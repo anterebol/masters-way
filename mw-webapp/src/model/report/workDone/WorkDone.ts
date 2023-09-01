@@ -1,5 +1,11 @@
 import {Time} from "src/model/report/time/Time";
-import {Unit} from "src/model/report/time/unit/Unit";
+
+interface WorkDoneParams {
+  id: string,
+  todoItem: string,
+  time: Time,
+}
+
 
 /**
  * What was done
@@ -21,10 +27,10 @@ export class WorkDone {
    */
   public time: Time;
 
-  constructor(id: string, todoItem: string, time: { unit: Unit, amount: number }) {
-    this.id = id;
-    this.todoItem = todoItem;
-    this.time = new Time(time.unit, time.amount);
+  constructor(params: WorkDoneParams) {
+    this.id = params.id;
+    this.todoItem = params.todoItem;
+    this.time = params.time;
   }
 
   /**
