@@ -2,6 +2,12 @@ import {onValue, ref, set} from "firebase/database";
 import {db} from "src/firebase";
 import {User as UserDTO} from "src/model/firebaseCollection/User";
 
+interface NewUserData {
+  uuid: string;
+  email: string;
+  name: string;
+}
+
 export class UserService {
 
   public static onValueFromRealTimeDb(callBack: (data: UserDTO[]) => void) {
@@ -13,15 +19,12 @@ export class UserService {
     });
   }
 
-  public static writeNewUserData(data: UserDTO) {
+  public static writeNewUserData(data: NewUserData) {
     const usersListRef = ref(db, "/users/" + data.uuid);
     set(usersListRef, {
       uuid: data.uuid,
       email: data.email,
       name: data.name,
-      ownWays: data.ownWays,
-      favoriteWays: data.favoriteWays,
-      mentoringWays: data.mentoringWays,
     });
   }
 
